@@ -75,6 +75,14 @@ Create a collection in MongoDB to hold information about movies
 Postman: 
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/52006563-78a8fc4f-7ac2-43f9-a734-cbab1997e4fd?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D52006563-78a8fc4f-7ac2-43f9-a734-cbab1997e4fd%26entityType%3Dcollection%26workspaceId%3D1285a7d8-0a92-4fb4-b986-114ef38aaf27#?env%5Bshrestha-hw3%5D=W3sia2V5IjoidG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0Iiwic2Vzc2lvblZhbHVlIjoiSldULi4uIiwiY29tcGxldGVTZXNzaW9uVmFsdWUiOiJKV1QgZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBaQ0k2SWpZNVlqWTRPV0ZpT1dVeE5UVmlNV0UyTXpVd04yUXdaaUlzSW5WelpYSnVZVzFsSWpvaWRYTmxjbDk0ZUdwNmJ6UWlMQ0pwWVhRaU9qRTNOek0xTnpBME56WXNJbVY0Y0NJNk1UYzNNelUzTkRBM05uMC5FTmtyWWhKc1FENjExbk1WZVBkcXNUc0R1U3ozcU16Y2VaNjZ6LWNxeUZ3Iiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6InVybCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQiLCJzZXNzaW9uVmFsdWUiOiJodHRwczovL2NzYzM5MTYtYXNzaWdubWVudDMtZ3dmdi5vbnJlbmRlci5jb20iLCJjb21wbGV0ZVNlc3Npb25WYWx1ZSI6Imh0dHBzOi8vY3NjMzkxNi1hc3NpZ25tZW50My1nd2Z2Lm9ucmVuZGVyLmNvbSIsInNlc3Npb25JbmRleCI6MX0seyJrZXkiOiJ1c2VybmFtZSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImFueSIsInNlc3Npb25WYWx1ZSI6InVzZXJfeHhqem80IiwiY29tcGxldGVTZXNzaW9uVmFsdWUiOiJ1c2VyX3h4anpvNCIsInNlc3Npb25JbmRleCI6Mn0seyJrZXkiOiJwYXNzd29yZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImFueSIsInNlc3Npb25WYWx1ZSI6InBhc3NfZmw0ZWtqIiwiY29tcGxldGVTZXNzaW9uVmFsdWUiOiJwYXNzX2ZsNGVraiIsInNlc3Npb25JbmRleCI6M31d)
 
+NOTE: My environment doesn't seem to be showing up despire me checking add an environment and adding it
+Here is my environment: 
+
+Variable                             |    Value
+__________________________________________________________________________________________
+token                                |  *left empty*
+url                                  |   https://csc3916-assignment3-gwfv.onrender.com
+
 API URL: https://csc3916-assignment3-gwfv.onrender.com
 
 NETLIFY: https://moviecollections333.netlify.app/ 
