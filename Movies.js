@@ -26,15 +26,19 @@ const MovieSchema = new Schema({
       'Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Mystery', 'Thriller', 'Western', 'Science Fiction'
     ],
   },
-  actors: [{
-    actorName: String,
-    characterName: String,
-  }], validate: {
-    validator: function (actors) {
-      return actors && actors.length >= 3; 
-    }, 
-    required: true, 
-  }, 
+  actors: {
+    type: [{
+        actorName: { type: String, required: true },
+        characterName: { type: String, required: true },
+    }],
+    required: true,
+    validate: {
+        validator: function (actors) {
+            return actors && actors.length >= 3;
+        },
+        message: 'A movie must have at least three actors.',
+    },
+},
 });
 
 module.exports = mongoose.model('Movie', MovieSchema);
