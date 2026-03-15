@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt'); // Use bcrypt, not bcrypt-nodejs
 
 // No need for mongoose.Promise = global.Promise;
-
+/*
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DB); // useNewUrlParser and useUnifiedTopology are no longer needed
@@ -15,7 +15,7 @@ const connectDB = async () => {
 };
 
 connectDB();
-
+*/
 
 const UserSchema = new Schema({
     name: String,

@@ -14,12 +14,6 @@ const connectDB = async () => {
 
 connectDB();
 
-// Movie schema
-var MovieSchema = new Schema({
-
-});
-
-module.exports = mongoose.model('Movie', MovieSchema);
 ///
 */
 
@@ -42,3 +36,5 @@ const MovieSchema = new Schema({
     required: true, 
   }, 
 });
+
+module.exports = mongoose.model('Movie', MovieSchema);
