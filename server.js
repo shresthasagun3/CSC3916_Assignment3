@@ -7,6 +7,17 @@ const cors = require('cors');
 const User = require('./Users');
 const Movie = require('./Movies'); // You're not using Movie, consider removing it
 
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.DB);
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+};
+connectDB();
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -73,7 +84,95 @@ router.route('/movies')
     })
     .post(authJwtController.isAuthenticated, async (req, res) => {
         return res.status(500).json({ success: false, message: 'POST request not supported' });
-    });
+    })
+    
+    //create new movie POST 
+    .post(authJwtController.isAuthenticated, async (req, res) => {
+    const { title, releaseDate, genre, actors } = req.body;
+ 
+    // Validate required fields
+    if (!title || !releaseDate || !genre || !actors || actors.length < 3) {
+      return res.status(400).json({
+        success: false,
+        message: 'Movie must include title, releaseDate, genre, and at least three actors.',
+      });
+    }
+ 
+    try {
+      const movie = new Movie({ title, releaseDate, genre, actors });
+      await movie.save();
+      res.status(201).json({ success: true, msg: 'Movie created successfully.', movie });
+    } catch (err) {
+      console.error(err);
+      if (err.name === 'ValidationError') {
+        return res.status(400).json({ success: false, message: err.message });
+      }
+      res.status(500).json({ success: false, message: 'Error saving movie.' });
+    }
+  })
+  .put(authJwtController.isAuthenticated, (req, res) => {
+    res.status(405).json({ success: false, message: 'PUT not supported on /movies. Use /movies/:title.' });
+  })
+
+  .delete(authJwtController.isAuthenticated, (req, res) => {
+    res.status(405).json({ success: false, message: 'DELETE not supported on /movies. Use /movies/:title.' });
+  });
+
+router.route('/movies/:title')
+
+  .get(authJwtController.isAuthenticated, async (req, res) => {
+    try {
+      const movie = await Movie.findOne({ title: req.params.title });
+      if (!movie) {
+        return res.status(404).json({ success: false, message: 'Movie not found.' });
+      }
+      res.status(200).json({ success: true, movie });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: 'Error retrieving movie.' });
+    }
+  })
+
+  .post(authJwtController.isAuthenticated, (req, res) => {
+    res.status(405).json({ success: false, message: 'POST not supported on /movies/:title. Use /movies.' });
+  })
+
+  .put(authJwtController.isAuthenticated, async (req, res) => {
+    try {
+      const updatedMovie = await Movie.findOneAndUpdate(
+        { title: req.params.title },
+        req.body,
+        { new: true, runValidators: true }
+      );
+ 
+      if (!updatedMovie) {
+        return res.status(404).json({ success: false, message: 'Movie not found.' });
+      }
+ 
+      res.status(200).json({ success: true, msg: 'Movie updated successfully.', movie: updatedMovie });
+    } catch (err) {
+      console.error(err);
+      if (err.name === 'ValidationError') {
+        return res.status(400).json({ success: false, message: err.message });
+      }
+      res.status(500).json({ success: false, message: 'Error updating movie.' });
+    }
+  })
+
+  .delete(authJwtController.isAuthenticated, async (req, res) => {
+    try {
+      const deletedMovie = await Movie.findOneAndDelete({ title: req.params.title });
+ 
+      if (!deletedMovie) {
+        return res.status(404).json({ success: false, message: 'Movie not found.' });
+      }
+ 
+      res.status(200).json({ success: true, msg: 'Movie deleted successfully.' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: 'Error deleting movie.' });
+    }
+  });
 
 app.use('/', router);
 
