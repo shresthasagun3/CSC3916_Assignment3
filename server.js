@@ -82,25 +82,23 @@ router.post('/signin', async (req, res) => { // Use async/await
 });
 
 router.route('/movies')
-    .get(authJwtController.isAuthenticated, async (req, res) => {
-        return res.status(500).json({ success: false, message: 'GET request not supported' });
-    })
-    .post(authJwtController.isAuthenticated, async (req, res) => {
-        return res.status(500).json({ success: false, message: 'POST request not supported' });
-    })
-    
-    //create new movie POST 
-    .post(authJwtController.isAuthenticated, async (req, res) => {
+  .get(authJwtController.isAuthenticated, async (req, res) => {
+    try {
+      const movies = await Movie.find();
+      res.status(200).json({ success: true, movies });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: 'Error retrieving movies.' });
+    }
+  })
+  .post(authJwtController.isAuthenticated, async (req, res) => {
     const { title, releaseDate, genre, actors } = req.body;
- 
-    // Validate required fields
     if (!title || !releaseDate || !genre || !actors || actors.length < 3) {
       return res.status(400).json({
         success: false,
         message: 'Movie must include title, releaseDate, genre, and at least three actors.',
       });
     }
- 
     try {
       const movie = new Movie({ title, releaseDate, genre, actors });
       await movie.save();
@@ -116,7 +114,6 @@ router.route('/movies')
   .put(authJwtController.isAuthenticated, (req, res) => {
     res.status(405).json({ success: false, message: 'PUT not supported on /movies. Use /movies/:title.' });
   })
-
   .delete(authJwtController.isAuthenticated, (req, res) => {
     res.status(405).json({ success: false, message: 'DELETE not supported on /movies. Use /movies/:title.' });
   });
